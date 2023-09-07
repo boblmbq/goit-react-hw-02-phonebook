@@ -2,6 +2,7 @@ import { Component } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
+import css from "./app.module.css"
 
 export class App extends Component {
   state = {
@@ -43,7 +44,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={css.div}>
         <h1>Phonebook</h1>
         <ContactForm submitHandler={this.formSubmitData} />
 

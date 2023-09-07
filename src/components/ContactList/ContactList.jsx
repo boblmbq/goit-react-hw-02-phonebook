@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
+// import css from './ContactList.module.css';
 
-const { Component } = require('react');
+import { Component } from 'react';
 
 class ContactList extends Component {
   itemKey = nanoid;

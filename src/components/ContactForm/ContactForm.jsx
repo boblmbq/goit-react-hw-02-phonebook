@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import css from './ContactForm.module.css';
+
 
 class ContactForm extends Component {
   state = {
@@ -34,7 +36,7 @@ class ContactForm extends Component {
     return (
       <form onSubmit={this.onFormSubmit}>
         <label htmlFor={this.nameId}>Name</label>
-        <input
+        <input className={css.input}
           value={this.state.name}
           onChange={this.onInputChange}
           id={this.nameId}
@@ -55,7 +57,7 @@ class ContactForm extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button type="submit">Add contact</button>
+        <button type="submit" className={css.button}>Add contact</button>
       </form>
     );
   }
