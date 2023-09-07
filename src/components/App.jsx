@@ -22,7 +22,7 @@ export class App extends Component {
       });
       return;
     }
-    alert(`The contact with name ${data.name} is already aded`);
+    alert(`The contact with name "${data.name}" is already aded`);
   };
 
   onDeleteItem = name => {
