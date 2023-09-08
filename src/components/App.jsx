@@ -2,7 +2,7 @@ import { Component } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
-import css from "./app.module.css"
+import css from './app.module.css';
 
 export class App extends Component {
   state = {
@@ -10,36 +10,35 @@ export class App extends Component {
     filter: '',
   };
 
-  contactsHandler = [];
-
   formSubmitData = data => {
-    const ifSome = this.contactsHandler.some(name => name.name === data.name)
-    
-    if (!ifSome) {
-      this.contactsHandler.push(data);
-      this.setState({
-        contacts: this.contactsHandler,
-      });
+    const ifSome = this.state.contacts.some(
+      name => name.name.toLowerCase() === data.name.toLowerCase()
+    );
+    if (ifSome) {
+      alert(`The contact with name "${data.name}" is already aded`);
       return;
     }
-    alert(`The contact with name "${data.name}" is already aded`);
+    this.setState(prev => ({
+      contacts: [...prev.contacts, data],
+    }));
   };
 
   onDeleteItem = name => {
-    const lastItems = this.contactsHandler.filter(item => item.name !== name);
-    this.contactsHandler = lastItems;
     this.setState({
-      contacts: lastItems,
+      contacts: this.state.contacts.filter(item => item.name !== name),
     });
   };
 
-  onFilterChange = input => {
-    const filteredItem = this.contactsHandler.filter(item =>
-      item.name.toLowerCase().includes(input.toLowerCase())
-    );
+  onFilterChange = evt => {
     this.setState({
-      contacts: filteredItem,
+      filter: evt.currentTarget.value,
     });
+  };
+
+  getFilteredContacts = () => {
+    return this.state.contacts.filter(el =>
+      el.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
   };
 
   render() {
@@ -49,9 +48,13 @@ export class App extends Component {
         <ContactForm submitHandler={this.formSubmitData} />
 
         <h2>Contacts</h2>
-        <Filter onFilterChange={this.onFilterChange} />
+        <Filter
+          onFilterChange={this.onFilterChange}
+          filterInput={this.state.filter}
+        />
         <ContactList
           allContacts={this.state.contacts}
+          filteredContacts={this.getFilteredContacts}
           onDeleteItem={this.onDeleteItem}
         />
       </div>

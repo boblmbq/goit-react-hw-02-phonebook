@@ -6,10 +6,10 @@ import { Component } from 'react';
 class ContactList extends Component {
   itemKey = nanoid;
   render() {
-    const { allContacts } = this.props;
+    const { filteredContacts } = this.props;
     return (
       <ul>
-        {allContacts.map(item => {
+        {filteredContacts().map(item => {
           return (
             <li key={this.itemKey()}>
               <p>
