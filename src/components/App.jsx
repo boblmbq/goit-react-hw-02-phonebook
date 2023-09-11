@@ -53,8 +53,7 @@ export class App extends Component {
           filterInput={this.state.filter}
         />
         <ContactList
-          allContacts={this.state.contacts}
-          filteredContacts={this.getFilteredContacts}
+          filteredContacts={this.getFilteredContacts()}
           onDeleteItem={this.onDeleteItem}
         />
       </div>
